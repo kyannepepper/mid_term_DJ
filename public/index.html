@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Hello, Vue</title>
+    </head>
+    <body>
+        <div id="app">
+            <div id="nav_bar">
+                <button id="logo" @click="redirectToHome"></button>
+                <div id="links">
+                    <button class="nav_links" @click="redirectToKits">kits</button>
+                    <button class="nav_links" @click="redirectToClasses">classes</button>
+                    <button class="nav_links" @click="redirectToSignin">signIn</button>
+                </div>
+                </div>
+            <div v-if="currentPage == 'home'">
+                
+                    <img src="images/homePage.png" class="homePageImg" width="500" height="333">
+                    <div id="joinClass">
+                        <h1>TAKE A CLASS OR JOIN A CAMP</h1>
+                        <p>Find camps and classes in person near you!</p>
+                        <input class="input" placeholder="City" type="text" v-model="citySearched">
+                        <h1>ONLINE CLASSES WITH A LIVE INSTRUCTOR</h1>
+                    </div>
+                    <div id="buyKits">
+                        <h1>BUY A KIT. BUILD IT AT HOME. TRACK YOUR PROGRESS.</h1>
+                    </div>
+            </div>
+            <div v-if="currentPage == 'kits'">
+                <div id="page">
+                    <div id="top">
+                        <h1>Menu</h1>
+                        <h1>Total: ${{total}}</h1>
+                    </div>
+                    <input class="input" placeholder="entrée" type="text" v-model="newCourse">
+                    <input class="input" placeholder="salad" type="text" v-model="newSalad">
+                    <input class="input" placeholder="dessert" type="text" v-model="newDessert">
+                    <button @click="addMeal" id="add_meal">Add Meal</button>
+                    <div id="meals">
+                        <div v-for="meal in meals" v-on:click="addToCart(meal)" class="meal"> 
+                            <div class="meal_parts"> <p class="parts">Entrée: {{ meal.course }} </p> <p class="parts"> Salad: {{ meal.salad }} </p> <p class="parts"> Desert: {{ meal.dessert }} </p> </div> <div class="price"> <p class="price_text">Price: ${{ meal.price }}</p> </div>
+                            <button @click="deleteVeggie(veg)"> DELETE ME </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div v-else-if="currentPage == 'classes'"></div>
+
+
+            <div v-else-if="currentPage == 'signIn'">
+                <div id="signInImg">
+                    <div class="login">
+                        <h1 id="loginH1">LOGIN</h1>
+                        <div id="buttonSlider"><button @click="login" :class="{ sliderButtonActive: signIn, sliderButtonInactive: !signIn }" >LOGIN</button><button @click="signup" :class="{ sliderButtonActive: !signIn, sliderButtonInactive: signIn }">SIGNUP</button></div>
+                        <div v-if="signIn == true" class="loginInputs">
+                            <input class="signinInput" placeholder="Email" type="text" v-model="email">
+                            <input class="signinInput" placeholder="Password" type="password" v-model="password">   
+                            <button @click="signIn()" class="logInButton" id="submitLogin">LOGIN</button>  
+                        </div>
+                        <div v-if="signIn == false" class="loginInputs">
+                            <input class="signinInput" placeholder="First Name" type="text" v-model="new_first_name">
+                            <input class="signinInput" placeholder="Last Name" type="text" v-model="new_last_name">
+                            <input class="signinInput" placeholder="Email" type="text" v-model="new_email">
+                            <input class="signinInput" placeholder="Password" type="password" v-model="new_password">
+                            <input class="signinInput" placeholder="Confirm password" type="password" v-model="new_password">   
+                            <button @click="createAccount()" class="logInButton" id="submitLogin">CREATE ACCOUNT</button>          
+                        </div>
+                        <p>Forgot password?</p>  
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="footer" v-if="currentPage != 'signIn'">
+                <div id="address">
+                    <h3>ADDRESS</h3>
+                    <p>2875 E 850 N St. George, UT 84790</p>
+                </div>
+                <div id="contactUs">
+                    <h3>CONTACT US</h3>
+                    <p>info@contactclimbinggym.com</p>
+                    <p>yogavia@contactclimbinggym.com</p>
+                    <p>435.879.3633</p>
+                </div>
+                <div id="hours">
+                    <h3>HOURS</h3>
+                    <p>Mon - Fri   6am - 10pm</p> 
+                    <p>Sat           10am - 10pm</p>
+                    <p>Sun          10am - 6pm</p>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>

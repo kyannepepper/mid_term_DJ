@@ -1,0 +1,203 @@
+*{box-sizing: border-box}
+body {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+h1 {
+    color: rgb(220, 220, 220);
+}
+#app {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#joinClass{
+    padding: 100px;
+    background-color: #11242A;
+    text-align: center;
+}
+#buyKits{
+    padding: 100px;
+}
+#footer{
+    padding: 100px;
+    background-color: #11242A;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+.homePageImg {
+    width: 100vw;
+    height: 100%;
+}
+#signInImg {
+    width: 100vw;
+    height: calc(100vh - 50px);
+    background-image:url('images/signIn.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    padding: 100px;
+    align-items: center;
+}
+#nav_bar{
+    background-color: white;
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+.nav_links {
+    background-color: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    font-size: 18px;
+    color: rgb(42, 42, 42);
+}
+.nav_links:hover {
+    cursor: pointer; 
+}
+.input {
+    height: 35px;
+    margin: 5px;
+    padding: 10px;
+    background-color: rgb(222, 222, 222);
+    border: none;
+    outline: none;
+}
+#top {
+    display: flex;
+    justify-content: space-between;
+}
+#add_meal {
+    height: 40px;
+    width: 100px;
+    color: rgb(255, 237, 230);
+    margin: 10px 5px;
+    background-color: rgb(48, 35, 30);
+    border: none;
+    outline: none;
+}
+#add_meal:hover {
+    background-color: rgb(41, 30, 25);
+    cursor: pointer;
+}
+#meals {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 30px;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+.meal:hover {
+    cursor: pointer;
+    filter: drop-shadow(rgb(105, 77, 66) 5px 5px 3px);
+}
+.meal_parts {
+    height: 125px;
+    background-color: rgb(186, 161, 151);
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 3px 3px 0px 0px; 
+}
+.parts {
+    margin: 0px;
+    color: rgb(52, 52, 52);
+    width: 130px;
+    overflow-wrap: break-word;
+}
+.price {
+    height: 35px;
+    width: 180px;
+    background-color: rgb(254, 254, 254);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px 0px 3px 3px; 
+}
+.price_text {
+    margin: 0;
+    color: rgb(52, 52, 52);
+}
+.login {
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    height:min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+}
+#loginH1 {
+    color: #2F5F76;
+    opacity: 100;
+}
+.logInButton {
+    padding: 10px;
+    width: 150px;
+    border: none;
+    background-color: #2F5F76;
+    color: white;
+    border: 2px solid #2F5F76;
+    border-radius: 5px 0 0 5px;
+}
+
+.loginInputs {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    color: #2F5F76;
+}
+.signinInput {
+    width: 350px;
+    border: 2px solid #2F5F76;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    outline: #4b8aa3;
+}
+#submitLogin {
+    width: 350px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#buttonSlider {
+    width: 350px;
+    height: 39.5px;
+    background-color:  #2F5F76;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sliderButtonActive {
+    width: 49%;
+    height: 80%;
+    border: none;
+    background-color: #4b8aa3;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.sliderButtonInactive {
+    width: 49%;
+    height: 80%;
+    background-color: rgba(0, 0, 255, 0);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
