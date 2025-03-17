@@ -21,8 +21,19 @@ const userSchema = new mongoose.Schema( {
     lastName: String,
     email: String,
     encryptedPassword: String,
-    
+    kits: Array,
 });
+
+const kit = mongoose.model('Kit', { 
+    name: String,
+    difficulty_level: Number,
+    price: Number,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+});
+
 
 userSchema.methods.setEncryptedPassword = function (plainPassword) {
     return new Promise((resolve, reject) => {
@@ -40,15 +51,12 @@ userSchema.methods.setEncryptedPassword = function (plainPassword) {
 };
 userSchema.methods.verifyEncryptedPassword = function (plainPassword) {
     return new Promise((resolve, reject) => {
-        bcrypt.compare(plainPassword, this.encryptedPassword).then(result => {
-            resolve(result).catch(err => reject(err));;
-        })
+        bcrypt.compare(plainPassword, this.encryptedPassword).then(result => resolve(result)).catch(err => reject(err));
     });
-
-}
+};
 const User = mongoose.model('User', userSchema);
-
 module.exports = {
     meal, // shorthand for meal: meal
-    User
+    User,
+    kit
 };

@@ -6,13 +6,18 @@
     <body>
         <div id="app">
             <div id="nav_bar">
-                <button id="logo" @click="redirectToHome"></button>
-                <div id="links">
+                
+                <div v-if="loggedIn == false" id="links">
+                    <button id="logo" @click="redirectToHome"></button>
                     <button class="nav_links" @click="redirectToKits">kits</button>
                     <button class="nav_links" @click="redirectToClasses">classes</button>
-                    <button class="nav_links" @click="redirectToSignin">signIn</button>
+                    <button  class="nav_links" @click="redirectToSignin">signIn</button>
                 </div>
+                <div v-else-if="loggedIn == true" id="links">
+                    <p>{{ usersName }}</p>
+                    <button  class="nav_links" @click="signYouOut">logOut</button>
                 </div>
+            </div>
             <div v-if="currentPage == 'home'">
                 
                     <img src="images/homePage.png" class="homePageImg" width="500" height="333">
@@ -26,23 +31,31 @@
                         <h1>BUY A KIT. BUILD IT AT HOME. TRACK YOUR PROGRESS.</h1>
                     </div>
             </div>
-            <div v-if="currentPage == 'kits'">
-                <div id="page">
-                    <div id="top">
-                        <h1>Menu</h1>
-                        <h1>Total: ${{total}}</h1>
+            <div v-if="currentPage == 'kits'" id="page">
+                    <div id="sideBar">
+                        <button class="sideBarLinks" @click="loadKitsFromAPI()" :class="{ active: view == 'kits' }">BUY A KIT</button>
+                        <button @click="loadYourKitsFromAPI()" class="sideBarLinks" :class="{ active: view == 'usersKit' }">YOUR KITS</button>
+                        <button @click="redirectToAddKit()" class="sideBarLinks" :class="{ active: view == 'addKit' }">ADD A KIT</button>
                     </div>
-                    <input class="input" placeholder="entrée" type="text" v-model="newCourse">
-                    <input class="input" placeholder="salad" type="text" v-model="newSalad">
-                    <input class="input" placeholder="dessert" type="text" v-model="newDessert">
-                    <button @click="addMeal" id="add_meal">Add Meal</button>
-                    <div id="meals">
-                        <div v-for="meal in meals" v-on:click="addToCart(meal)" class="meal"> 
-                            <div class="meal_parts"> <p class="parts">Entrée: {{ meal.course }} </p> <p class="parts"> Salad: {{ meal.salad }} </p> <p class="parts"> Desert: {{ meal.dessert }} </p> </div> <div class="price"> <p class="price_text">Price: ${{ meal.price }}</p> </div>
-                            <button @click="deleteVeggie(veg)"> DELETE ME </button>
+                    
+                    <div v-if="view == 'kits'" class="backgroundKits">
+                        <div  v-for="kit in kits" v-on:click="addToCart(kit)" class="kit"> 
+                            <div class="kit_card">  <p class="parts">Difficulty level: {{ kit.difficulty_level }} </p> <p class="parts"> Price: ${{ kit.price }} </p> </div> <div class="price">{{ kit.name }}</div>
                         </div>
                     </div>
-                </div>
+                    <div v-else-if="view == 'usersKit'" class="backgroundKits">
+                        <div v-for="kit in usersKits" v-on:click="viewKit(kit)" class="kit"> 
+                            <div class="kit_card"></div> <div class="price">{{ kit.name }}</div>
+                        </div>
+                    </div>
+                    <div v-else-if="view == 'addKit'" class="backgroundKits">
+                        <div class="addKit">
+                            <input class="input" placeholder="Name" type="text" v-model="new_kit_name">
+                            <input class="input" placeholder="Difficulty Level" type="number" v-model="new_kit_difficulty">
+                            <input class="input" placeholder="Price" type="number" v-model="new_kit_price">
+                            <button @click="addKit()" class="logInButton" id="submitLogin">ADD KIT</button>  
+                        </div>
+                    </div>
             </div>
 
 
@@ -57,7 +70,7 @@
                         <div v-if="signIn == true" class="loginInputs">
                             <input class="signinInput" placeholder="Email" type="text" v-model="email">
                             <input class="signinInput" placeholder="Password" type="password" v-model="password">   
-                            <button @click="signIn()" class="logInButton" id="submitLogin">LOGIN</button>  
+                            <button @click="logIn()" class="logInButton" id="submitLogin">LOGIN</button>  
                         </div>
                         <div v-if="signIn == false" class="loginInputs">
                             <input class="signinInput" placeholder="First Name" type="text" v-model="new_first_name">
@@ -73,7 +86,7 @@
             </div>
 
 
-            <div id="footer" v-if="currentPage != 'signIn'">
+            <div id="footer" v-if="currentPage != 'signIn' && currentPage != 'kits'">
                 <div id="address">
                     <h3>ADDRESS</h3>
                     <p>2875 E 850 N St. George, UT 84790</p>
