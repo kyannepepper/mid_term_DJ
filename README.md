@@ -11,7 +11,7 @@ Attributes:
 * Salad (string)
 * Price (number)
 
-  **User**
+**User**
 
 Attributes:
 
@@ -20,7 +20,7 @@ Attributes:
 * Email (string)
 * Password (string)
 
-  **Kit**
+**Kit**
 
 Attributes:
 
